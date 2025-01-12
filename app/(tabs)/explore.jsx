@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Image, ImageBackground, Platform } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
 import { ExternalLink } from '@/components/ExternalLink';
@@ -6,6 +6,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import jib from "@/assets/images/jib.png"
 
 export default function TabTwoScreen() {
   return (
@@ -19,6 +20,8 @@ export default function TabTwoScreen() {
           style={styles.headerImage}
         />
       }>
+        <Image source={jib} resizeMode="stretch" style={styles.image
+        }/>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
@@ -106,4 +109,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
   },
+  image:{
+    width: '100%', 
+    height: '50%',
+    justifyContent: 'center'
+}
 });
