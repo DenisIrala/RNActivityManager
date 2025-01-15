@@ -12,6 +12,8 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
+    
+
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -33,6 +35,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          animation: 'shift'
         }}
       />
       <Tabs.Screen
@@ -40,6 +43,15 @@ export default function TabLayout() {
         options={{
           title: 'Explore',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          animation: 'shift'
+        }}
+      />
+      <Tabs.Screen
+        name="add"
+        options={{
+          title: '(crud)/add',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="circle.dashed.rectangle" color={color} />,
+          animation: 'fade'
         }}
       />
     </Tabs>

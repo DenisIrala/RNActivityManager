@@ -7,21 +7,17 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import jib from "@/assets/images/jib.png"
+import { View, Text } from 'react-native';
 
 export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
-        />
-      }>
-        <Image source={jib} resizeMode="stretch" style={styles.image
-        }/>
+      >
+        <Collapsible title='jib'>
+        
+        <Image source={jib} resizeMode="stretch" style={{ alignSelf: 'center' }} />
+</Collapsible>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
@@ -111,7 +107,7 @@ const styles = StyleSheet.create({
   },
   image:{
     width: '100%', 
-    height: '50%',
+    height: '100%',
     justifyContent: 'center'
 }
 });

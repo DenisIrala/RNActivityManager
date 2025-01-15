@@ -30,14 +30,10 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-       <Stack.Screen name="(crud)" options={{ headerShown: false }} />        
-        <Stack.Screen name="(tabs)/index" options={{ title: "Homexxx" , headerShadowVisible: false}} />
-        <Stack.Screen name="(tabs)/explore" options={{ title: "Explorexxx" , headerShadowVisible: true}} />
-        <Stack.Screen name="(tabs)" options={{headerShown: false}} />
-
-        <Stack.Screen name="+not-found" />
-      </Stack>  
-      <StatusBar style="auto" hidden/>
+        <Stack.Screen name="crud" options={{ title: "NOOO", headerShown: false}} />
+        <Stack.Screen name="notabs" options={{ title: "Homeee" , headerShadowVisible: false,}} />
+      </Stack>
+      <StatusBar style="auto" backgroundColor='red'/>
     </ThemeProvider>
   );
 }
