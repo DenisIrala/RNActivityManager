@@ -6,7 +6,6 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import jib from "@/assets/images/jib.png"
 import { View, Text } from 'react-native';
 import { useState } from 'react';
 

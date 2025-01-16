@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, ImageBackground, Pressable } from 'react-native'
 import React from 'react'
-import osh from "@/assets/images/osh.png"
+import osh from "@/assets/images/osh.jpg"
 import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { defaultStyles } from '@/styles'
