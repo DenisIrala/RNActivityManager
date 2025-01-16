@@ -4,7 +4,6 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -14,7 +13,8 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
+    "SpaceMono": require('@/assets/fonts/SpaceMono-Regular.ttf'),
+    "Inter-Bold": require ('@/assets/fonts/Inter-Bold.ttf'),
   });
 
   useEffect(() => {
@@ -31,8 +31,8 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
        <Stack.Screen name="(crud)" options={{ headerShown: false }} />        
-        <Stack.Screen name="(tabs)/index" options={{ title: "Homexxx" , headerShadowVisible: false}} />
-        <Stack.Screen name="(tabs)/explore" options={{ title: "Explorexxx" , headerShadowVisible: true}} />
+        <Stack.Screen name="index" options={{ title: "Homexxx" , headerShadowVisible: false}} />
+        <Stack.Screen name="explore" options={{ title: "Explorexxx" , headerShadowVisible: true}} />
         <Stack.Screen name="(tabs)" options={{headerShown: false}} />
 
         <Stack.Screen name="+not-found" />

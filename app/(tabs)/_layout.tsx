@@ -50,7 +50,7 @@ export default function TabLayout() {
         name="add"
         options={{
           title: '(crud)/add',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="circle.dashed.rectangle" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="info" color={color} />,
           animation: 'fade'
         }}
       />

@@ -1,37 +1,76 @@
-import { View, Text, StyleSheet, ImageBackground, Pressable } from 'react-native'
-import React from 'react'
+import {StatusBar, View, Text, StyleSheet, ImageBackground, Pressable, TouchableOpacity } from 'react-native'
+import React, { Suspense, useState } from 'react'
 import osh from "@/assets/images/osh.jpg"
 import { Link } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { defaultStyles } from '@/styles'
+import { Canvas } from '@react-three/fiber/native'
+import Model from '@/components/Model.tsx'
+import useControls from 'r3f-native-orbitcontrols'
+import Trigger from '@/components/Trigger'
+import { Loader } from 'three'
 
 const app = () => {
+  const [OrbitControls, event] = useControls()
+  const [loading, setLoading] = useState(false)
+
   return (
-    <SafeAreaView style={defaultStyles.container}>
+    <SafeAreaView style={defaultStyles.container} >
+
       <ImageBackground source={osh} resizeMode="stretch" style={styles.image}>
-      <Text style={styles.title}>Champion Displayer</Text>
-      <Link href="notabs" style={{marginHorizontal: 'auto'}} asChild><Pressable style={styles.button}><text style={styles.buttonText}>Explore</text></Pressable></Link>
+        <StatusBar animated barStyle={"light-content"}/>
+        <View>
+        <Text style={styles.title}>Activity Manager</Text>
+        </View>
+
+        <View style={styles.modelContainer} {...event}>
+          {loading && <Loader/>}
+        <Canvas> 
+              <OrbitControls enablePan={false} enableZoom={false}/>
+              <directionalLight position={[1,0,0]} args={['white', 2]} />
+              <directionalLight position={[-1,0,1]} args={['white', 2]} />
+              <directionalLight position={[1,1,0]} args={['white', 2]} />
+
+              <Suspense fallback={<Trigger setLoading={setLoading}/>}><Model/></Suspense>
+        </Canvas>
+        </View>
+
+        <Link href="notabs" style={{marginHorizontal: 'auto'}} asChild>
+
+        <TouchableOpacity style={styles.button} >
+         <Text style={styles.buttonText}>{"Press me"}</Text>
+        </TouchableOpacity>
+
+        </Link>
+
       </ImageBackground>
+
     </SafeAreaView>
   )
 }
 
+
+
 const styles = StyleSheet.create({
+    modelContainer:{
+      flex:1,
+      marginTop: 20
+    },
     image:{
         width: '100%', 
         height: '100%',
         flex: 1,
-        resizeMode: 'stretch',
         justifyContent: 'center'
     }
     ,
     title:{
-        color:'white',
-        fontSize: 42,
+        fontSize: 40,
         fontWeight: 'bold',
+        color: '#ADD8E6',
+        marginTop: 30, 
         textAlign: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        marginBottom: 120,
+        backgroundColor: 'rgba(0,0,0,0.85)',
+
     },
     link:{
         color:'white',
@@ -47,18 +86,13 @@ const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: 'bold',
       textAlign: 'center',
-      padding: 4,
   }
   ,button:{
-    justifyContent:'center',
-    height: 60,
-    width: 150,
-    borderRadius: 20,
-    backgroundColor: 'rgba(0,0,0,0.75)',
-    padding: 6,
-    marginBottom: 50,
-
-  }
+    backgroundColor: '#3498db',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 100
+  },
 })
 
 export default app
