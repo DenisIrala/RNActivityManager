@@ -1,5 +1,5 @@
 # Summary
-To-Do List Application done with React Native
+To-Do List Application done with React Native entirely by myself.
 
 # Features
 - Custom rotatable 3D Model loaded with Three.JS with an implemented loading icon and custom lighting.
