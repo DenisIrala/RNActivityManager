@@ -30,7 +30,6 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="crud" options={{ title: "NOOO", headerShown: false}} />
         <Stack.Screen name="notabs" options={{ title: "Homeee" , headerShadowVisible: false,}} />
       </Stack>
       <StatusBar style="auto" backgroundColor='red'/>

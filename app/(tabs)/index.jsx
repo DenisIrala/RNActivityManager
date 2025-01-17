@@ -8,16 +8,16 @@ import { Canvas } from '@react-three/fiber/native'
 import Model from '@/components/Model.tsx'
 import useControls from 'r3f-native-orbitcontrols'
 import Trigger from '@/components/Trigger'
-import { Loader } from 'three'
+import { Loader } from '@/components/Loader'
 
 const app = () => {
   const [OrbitControls, event] = useControls()
   const [loading, setLoading] = useState(false)
 
   return (
-    <SafeAreaView style={defaultStyles.container} >
+    <SafeAreaView style={[defaultStyles.container, { backgroundColor: 'transparent' }]} >
 
-      <ImageBackground source={osh} resizeMode="stretch" style={styles.image}>
+      <ImageBackground source={osh} style={styles.image}>
         <StatusBar animated barStyle={"light-content"}/>
         <View>
         <Text style={styles.title}>Activity Manager</Text>
@@ -26,7 +26,7 @@ const app = () => {
         <View style={styles.modelContainer} {...event}>
           {loading && <Loader/>}
         <Canvas> 
-              <OrbitControls enablePan={false} enableZoom={false}/>
+              <OrbitControls enablePan={true} enableZoom={false}/>
               <directionalLight position={[1,0,0]} args={['white', 2]} />
               <directionalLight position={[-1,0,1]} args={['white', 2]} />
               <directionalLight position={[1,1,0]} args={['white', 2]} />
@@ -38,7 +38,7 @@ const app = () => {
         <Link href="notabs" style={{marginHorizontal: 'auto'}} asChild>
 
         <TouchableOpacity style={styles.button} >
-         <Text style={styles.buttonText}>{"Press me"}</Text>
+         <Text style={styles.buttonText}>{"Push to enter hidden page"}</Text>
         </TouchableOpacity>
 
         </Link>
@@ -57,10 +57,11 @@ const styles = StyleSheet.create({
       marginTop: 20
     },
     image:{
-        width: '100%', 
-        height: '100%',
         flex: 1,
-        justifyContent: 'center'
+        width: '100%', 
+        height: '130%',
+        justifyContent: 'center',
+
     }
     ,
     title:{

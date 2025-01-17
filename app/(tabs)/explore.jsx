@@ -13,7 +13,7 @@ export default function TabTwoScreen() {
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       >
-        <Text>aaaaaaaaaaaaa</Text>
+        <Text style={styles.text}>Welcome to the not so secret page!</Text>
     </ParallaxScrollView>
   );
 }
@@ -33,5 +33,10 @@ const styles = StyleSheet.create({
     width: '100%', 
     height: '100%',
     justifyContent: 'center'
-}
+},
+  text:{
+    fontSize: 16,
+    color: '#333',
+    textAlign: 'center',
+  }
 });

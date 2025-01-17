@@ -10,7 +10,9 @@ import { View, Text } from 'react-native';
 
 export default function PageTwo() {
   return (
-    <View><Text>Example</Text></View>
+    <View>
+      <Text style={styles.text}>Welcome to the secret page!</Text>
+    </View>
   );
 }
 
@@ -29,5 +31,11 @@ const styles = StyleSheet.create({
     width: '100%', 
     height: '100%',
     justifyContent: 'center'
+}
+,text:{
+    fontSize: 50,
+    color: '#ffffff',
+    textAlign: 'center',
+
 }
 });

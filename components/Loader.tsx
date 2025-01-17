@@ -1,9 +1,8 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-type Props = {}
 
-const Loader = (props: Props) => {
+const Loader = () => {
   return (
     <View style={styles.container}>
       <ActivityIndicator size={'large'} color={'blue'}/>
@@ -11,7 +10,6 @@ const Loader = (props: Props) => {
   )
 }
 
-export default Loader
 
 const styles = StyleSheet.create({
     container:{
@@ -19,3 +17,5 @@ const styles = StyleSheet.create({
         justifyContent: "center"
      },
 })
+
+export default Loader
