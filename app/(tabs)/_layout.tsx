@@ -50,7 +50,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="list"
         options={{
           title: 'List',
           tabBarIcon: ({ color }) => <AntDesign size={25} name="bars" color={'white'} />,
