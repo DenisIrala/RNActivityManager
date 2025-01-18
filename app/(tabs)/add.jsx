@@ -3,54 +3,44 @@ import { View, Text } from 'react-native';
 import { useState, useEffect} from 'react';
 import {data} from '@/data/todos';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function PageTwo() {
   /*
-  const [dataJSON, setDataJSON] = useState([]);
+  const save = async () => {
+    try {
+      await AsyncStorage.setItem("MyName", text) ;
+    } catch(err){
+      alert(err)
+    }
+  }
 
-  // Fetch data from AsyncStorage or initialize with the JSON file
+  const load=  async () => {
+    try{
+      let name =await AsyncStorage.getItem("MyName")
+      if(name !== null) setText(name)
+    } catch (err){
+      alert(err)
+    }
+  }
   useEffect(() => {
-
-    try {
-      AsyncStorage.clear();
-      console.log('All data cleared!');
-    } catch (error) {
-      console.error('Error clearing all data:', error);
-    }
-
-    const fetchData = async () => {
-      try {
-        const storedData = await AsyncStorage.getItem("dataJSON");
-        if (storedData) {
-          // Load stored data if it exists
-          setDataJSON(JSON.parse(storedData));
-        } else {
-          // Save the initial JSON data to AsyncStorage
-          await AsyncStorage.setItem("dataJSON", JSON.stringify(initialData));
-          setDataJSON(initialData);
-        }
-      } catch (error) {
-        console.error("Error loading data:", error);
-      }
+    const handleFocus = () => {
+      // Perform actions when the tab/window gains focus
+      load()
+      // You can trigger a state update or other actions here
     };
-    fetchData();
+
+    window.addEventListener('focus', handleFocus);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
   }, []);
-
-  const saveData = async (newData) => {
-    try {
-      await AsyncStorage.setItem("dataJSON", JSON.stringify(newData));
-      setDataJSON(newData);
-    } catch (error) {
-      console.error("Error saving data:", error);
-    }
-  };
-
-  const data = dataJSON.map((item) => ({
-    id: item.id,
-    title: item.title,
-    completed: item.completed,
-  }));
   */
+  const data=[];
+
+ //const [data, setData] = useState()
   
   const [text, setText] = useState('')
 
@@ -59,7 +49,8 @@ export default function PageTwo() {
       if(text.trim()){
         const newId = todos.length>0 ? todos[0].id+1 : 1;
         setTodos([{id: newId, title: text, completed: false}, ...todos])
-        setText('')
+        save()
+        setText('')      
       }
     }
   

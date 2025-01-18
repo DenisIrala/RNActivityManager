@@ -51,7 +51,8 @@
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
     "three": "^0.172.0",
-    "three-orbitcontrols": "^2.110.2"
+    "three-orbitcontrols": "^2.110.2",
+    "expo-sqlite": "~15.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
