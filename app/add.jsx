@@ -1,59 +1,15 @@
 import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text } from 'react-native';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useCallback} from 'react';
 import {data} from '@/data/todos';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SQLite from 'expo-sqlite';
+import { useFocusEffect } from 'expo-router';
 
+//type todo = {id: Number; title: String; completed: Boolean }
 
 export default function PageTwo() {
-  /*
-  const save = async () => {
-    try {
-      await AsyncStorage.setItem("MyName", text) ;
-    } catch(err){
-      alert(err)
-    }
-  }
-
-  const load=  async () => {
-    try{
-      let name =await AsyncStorage.getItem("MyName")
-      if(name !== null) setText(name)
-    } catch (err){
-      alert(err)
-    }
-  }
-  useEffect(() => {
-    const handleFocus = () => {
-      // Perform actions when the tab/window gains focus
-      load()
-      // You can trigger a state update or other actions here
-    };
-
-    window.addEventListener('focus', handleFocus);
-
-    return () => {
-      window.removeEventListener('focus', handleFocus);
-    };
-  }, []);
-  */
-  const data=[];
-
- //const [data, setData] = useState()
-  
-  const [text, setText] = useState('')
-
-  const [todos, setTodos]=useState(data.sort((a,b)=>b.id - a.id ))
-  const addTodo = () => {
-      if(text.trim()){
-        const newId = todos.length>0 ? todos[0].id+1 : 1;
-        setTodos([{id: newId, title: text, completed: false}, ...todos])
-        save()
-        setText('')      
-      }
-    }
-  
 
   return (
     <SafeAreaView style ={styles.container}>

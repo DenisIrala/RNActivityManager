@@ -7,46 +7,6 @@ import {data} from '@/data/todos';
 
 export default function List() {
 
- /*
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const storedData = await AsyncStorage.getItem("dataJSON");
-        if (storedData) {
-          // Load stored data if it exists
-          setDataJSON(JSON.parse(storedData));
-        }
-        else{
-            setDataJSON(JSON.parse("               {'id': 1,              'title': 'test',             'completed': false          }"   ))
-        }
-      } catch (error) {
-        console.error("Error loading data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const saveData = async (newData) => {
-    try {
-      await AsyncStorage.setItem("dataJSON", JSON.stringify(newData));
-      setDataJSON(newData);
-    } catch (error) {
-      console.error("Error saving data:", error);
-    }
-  };
-
-  const deleteItem = (id) => {
-    const updatedData = dataJSON.filter((item) => item.id !== id);
-    saveData(updatedData);
-  };
-
-    const data = dataJSON.map((item) => ({
-        id: item.id,
-        title: item.title,
-        completed: item.completed,
-      }));
-*/
-
     const [todos, setTodos]=useState(data.sort((a,b)=>b.id - a.id ))
 
   const toggleComplete = (id) => {
@@ -57,6 +17,17 @@ export default function List() {
 
     }
   
+    const [text, setText] = useState('')
+
+
+  const addTodo = async () => {
+      if(text.trim()){
+        const newId = todos.length>0 ? todos[0].id+1 : 1;
+        setTodos([{id: newId, title: text, completed: false}, ...todos])
+        setText('')
+      }
+    }
+
     const removeTodo = (id) => {
       setTodos(todos.filter(todo => todo.id !==id))
     }
@@ -77,6 +48,18 @@ export default function List() {
 
   return (
     <SafeAreaView style ={styles.container}>
+      <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.input}
+                  placeholder='Write the todo here'
+                  placeholderTextColor="white"
+                  value={text}
+                  onChangeText={setText}
+                />
+                <TouchableOpacity onPress={addTodo} style={styles.button}>
+                  <Text styles={styles.buttonText}>Add</Text>
+                </TouchableOpacity>
+            </View>
       <FlatList data={todos}
         renderItem={renderItem}
         keyExtractor={todo => todo.id}

@@ -10,3 +10,7 @@ To-Do List Application done with React Native entirely by myself.
 <p align="center">
 <img src="screenshot.jpg" width="250">
 </p>
+
+<p align="center">
+<img src="screenshot2.jpg" width="250">
+</p>
