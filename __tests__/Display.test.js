@@ -16,7 +16,7 @@ describe('Display', () => {
   const mockOnToggle = jest.fn();
   const mockOnRemove = jest.fn();
 
-  it('renders the todos correctly', () => {
+  it('Renders the todos correctly', () => {
 
     const { getByText } = render(
       <Display todos={mockTodos} onToggle={mockOnToggle} onRemove={mockOnRemove} />
@@ -28,7 +28,7 @@ describe('Display', () => {
     });
   });
 
-  it('applies completed styles to completed todos', () => {
+  it('Applies completed styles to completed todos', () => {
     const { getByText } = render(
       <Display todos={mockTodos} onToggle={mockOnToggle} onRemove={mockOnRemove} />
     );
@@ -37,7 +37,7 @@ describe('Display', () => {
     expect(completedTodo.props.style).toContainEqual({ textDecorationLine: 'line-through', color: 'gray' });
   });
 
-  it('triggers onToggle when a todo is pressed', () => {
+  it('Triggers onToggle when a todo is pressed', () => {
     const { getByText } = render(
       <Display todos={mockTodos} onToggle={mockOnToggle} onRemove={mockOnRemove} />
     );
@@ -48,7 +48,7 @@ describe('Display', () => {
     expect(mockOnToggle).toHaveBeenCalledTimes(1);
   });
 
-  it('triggers onRemove with correct id when delete icon is pressed', () => {
+  it('Triggers onRemove with correct id when delete icon is pressed', () => {
       const { getByTestId } = render(
       <Display todos={mockTodos} onToggle={mockOnToggle} onRemove={mockOnRemove} />
     );
@@ -59,7 +59,7 @@ describe('Display', () => {
       expect(mockOnRemove).toHaveBeenCalledWith("1")
     });
 
-  it('onRemove is triggered with correct id', () => {
+  it('OnRemove is triggered with correct id', () => {
       const { getByTestId } = render(
       <Display todos={mockTodos} onToggle={mockOnToggle} onRemove={mockOnRemove} />
     );

@@ -4,7 +4,7 @@ import Trigger from '@/components/Trigger';
 
 describe('Trigger', () => {
   
-it('renders correctly', () => {
+it('Correct rendering', () => {
   
   const {getByText} = render(<Trigger/>);
   expect(getByText("Loading")).toBeTruthy();

@@ -5,9 +5,9 @@ import { press } from '@testing-library/react-native/build/user-event/press';
 
 describe('AddTab', () => {
 
-  it('button is working appropriately', () => {
+  it('Button is working appropriately without text', () => {
   
-    const mockOnPress = jest.fn(1);
+    const mockOnPress = jest.fn();
     const { getByTestId } = render(<AddTab todos={[]} onAddTodo={mockOnPress}/>);
     const button = getByTestId("button");
     fireEvent.press(button);
@@ -16,7 +16,7 @@ describe('AddTab', () => {
     }
     )
 
-    it('button is working appropriately after adding text', () => {
+    it('Button is working appropriately after adding text', () => {
   
       const mockOnPress = jest.fn();
       const { getByTestId } = render(<AddTab todos={[]} onAddTodo={mockOnPress}/>);
