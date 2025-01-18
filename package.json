@@ -12,7 +12,10 @@
     "lint": "expo lint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(?:.pnpm/)?((jest-)?react-native|@react-native(-community)?|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg))"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
@@ -23,6 +26,7 @@
     "@react-three/drei": "^9.121.2",
     "@react-three/fiber": "^8.17.12",
     "@shopify/react-native-skia": "^1.10.2",
+    "@testing-library/user-event": "^14.6.0",
     "@types/three": "^0.172.0",
     "expo": "~52.0.25",
     "expo-blur": "~14.0.2",
@@ -51,11 +55,12 @@
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
     "three": "^0.172.0",
-    "three-orbitcontrols": "^2.110.2",
-    "expo-sqlite": "~15.0.6"
+    "three-orbitcontrols": "^2.110.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@babel/preset-typescript": "^7.26.0",
+    "@testing-library/react-native": "^13.0.1",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",

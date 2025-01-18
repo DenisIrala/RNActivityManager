@@ -1,26 +1,25 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 type Props = {
 
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    setLoading:React.Dispatch<React.SetStateAction<boolean>>;
 
 }
 
 const Trigger = ({setLoading}: Props) => {
+   const [isLoading, setIsLoading] = useState(false); 
 
     useEffect(() => {
-      setLoading(true);
-    
+      setIsLoading(true);
       return () => {
-        setLoading(false);
+        setIsLoading(false);
       }
     }, [setLoading])
     
 
   return (
-    <>
-    </>
+    isLoading && <Text>Loading</Text> 
   )
 }
 

@@ -6,8 +6,6 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { SQLiteDatabase, SQLiteProvider } from 'expo-sqlite';
-import * as SQLite from 'expo-sqlite';
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -30,14 +28,7 @@ export default function RootLayout() {
     return null;
   }
 
-  const createDb = async (db :SQLiteDatabase) =>{
-    await db.execAsync(
-        "CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, completed INTEGER);"
-    )
-  }
-
   return (
-    <SQLiteProvider databaseName="test.db" onInit={createDb}>
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
        <Stack.Screen name="(crud)" options={{ headerShown: false }} />        
@@ -47,6 +38,5 @@ export default function RootLayout() {
       </Stack>  
       <StatusBar style="auto" hidden/>
     </ThemeProvider>
-    </SQLiteProvider>
   );
 }

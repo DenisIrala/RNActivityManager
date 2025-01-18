@@ -35,9 +35,9 @@ const app = () => {
         </Canvas>
         </View>
 
-        <Link href="notabs" style={{marginHorizontal: 'auto'}} asChild>
+        <Link href="notabs"  style={{marginHorizontal: 'auto'}} asChild>
 
-        <TouchableOpacity style={styles.button} >
+        <TouchableOpacity style={styles.button}>
          <Text style={styles.buttonText}>{"Push to enter hidden page"}</Text>
         </TouchableOpacity>
 

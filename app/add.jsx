@@ -1,83 +1,100 @@
-import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { View, Text } from 'react-native';
-import { useState, useEffect, useCallback} from 'react';
-import {data} from '@/data/todos';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as SQLite from 'expo-sqlite';
-import { useFocusEffect } from 'expo-router';
+import {StatusBar, View, Text, StyleSheet, ImageBackground, Pressable, TouchableOpacity } from 'react-native'
+import React, { Suspense, useState } from 'react'
+import osh from "@/assets/images/osh.jpg"
+import { Link } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { defaultStyles } from '@/styles'
+import { Canvas } from '@react-three/fiber/native'
+import Model from '@/components/Model.tsx'
+import useControls from 'r3f-native-orbitcontrols'
+import Trigger from '@/components/Trigger'
+import AddTab from '@/components/AddTab'
+import { Loader } from '@/components/Loader'
 
-//type todo = {id: Number; title: String; completed: Boolean }
-
-export default function PageTwo() {
+const app = () => {
+  const [OrbitControls, event] = useControls()
+  const [loading, setLoading] = useState(false)
 
   return (
-    <SafeAreaView style ={styles.container}>
-      <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder='Write the todo here'
-            placeholderTextColor="white"
-            value={text}
-            onChangeText={setText}
-          />
-          <TouchableOpacity onPress={addTodo} style={styles.button}>
-            <Text styles={styles.buttonText}>Add</Text>
-          </TouchableOpacity>
-      </View>
+    <SafeAreaView style={[defaultStyles.container, { backgroundColor: 'transparent' }]} >
+
+      <ImageBackground source={osh} style={styles.image}>
+        <StatusBar animated barStyle={"light-content"}/>
+        <View>
+        <Text style={styles.title}>Activity Manager</Text>
+        </View>
+
+        <View style={styles.modelContainer} {...event}>
+          {loading && <Loader/>}
+        <Canvas> 
+              <OrbitControls enablePan={true} enableZoom={false}/>
+              <directionalLight position={[1,0,0]} args={['white', 2]} />
+              <directionalLight position={[-1,0,1]} args={['white', 2]} />
+              <directionalLight position={[1,1,0]} args={['white', 2]} />
+
+              <Suspense fallback={<Trigger setLoading={setLoading}/>}><Model/></Suspense>
+        </Canvas>
+        </View>
+
+        <Link href="notabs"  style={{marginHorizontal: 'auto'}} asChild>
+
+        <TouchableOpacity style={styles.button} testID="button" onPress={props.onPress}>
+         <Text style={styles.buttonText}>{"Push to enter hidden page"}</Text>
+        </TouchableOpacity>
+
+        </Link>
+
+      </ImageBackground>
+
     </SafeAreaView>
-  );
+  )
 }
-  
+
+
 
 const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    backgroundColor: '#191970'
-  },
-  input: {
-    flex: 1,
-    borderColor: '#C0C0C0',
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 10,
-    marginRight: 10,
-    fontSize: 18,
-    minWidth: 0,
-    color: 'white'
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    marginBottom: 10,
-    padding: 10,
-    width: '100%',
-    marginHorizontal: 'auto',
-    maxWidth: 1024,
-    pointerEvents: 'auto'
-  },
-  button: {
-    backgroundColor: '#FFFFF0',
-    borderRadius: 5,
-    padding: 15,
+    modelContainer:{
+      flex:1,
+      marginTop: 20
+    },
+    image:{
+        flex: 1,
+        width: '100%', 
+        height: '130%',
+        justifyContent: 'center',
 
+    }
+    ,
+    title:{
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: '#ADD8E6',
+        marginTop: 30, 
+        textAlign: 'center',
+        backgroundColor: 'rgba(0,0,0,0.85)',
+
+    },
+    link:{
+        color:'white',
+        fontSize: 42,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        textDecorationLine: 'underline',
+        padding: 4,
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    buttonText:{
+      color:'white',
+      fontSize: 16,
+      fontWeight: 'bold',
+      textAlign: 'center',
+  }
+  ,button:{
+    backgroundColor: '#3498db',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 100
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'black'
-  },
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  image:{
-    width: '100%', 
-    height: '100%',
-    justifyContent: 'center'
-}
-});
+})
+
+export default app
