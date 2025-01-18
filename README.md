@@ -2,7 +2,7 @@
 To-Do List Application done with React Native, Expo, Three.JS and Jest entirely by myself.
 
 # Features
-## Fully interactive a to-do list functionality:
+## Fully interactive to-do list functionality
   - Asynchronous. Adding new to-dos seemlessly in an asynchronous way.
   - Markable. They can be crossed away just by tapping them.
   - Deletable. Includes a custom icon per to-do that allows the user to remove them.
