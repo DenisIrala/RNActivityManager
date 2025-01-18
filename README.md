@@ -26,11 +26,10 @@ To-Do List Application done with React Native, Expo, Three.JS and Jest entirely 
  #### Trigger.js
 - Correct rendering
 
-<img src="screenshot3.jpg" width="250">
+<img src="screenshot3.png" width="250">
 </p>
 
 ## Custom rotatable 3D Model loaded with Three.JS with an implemented loading icon and custom lighting.
-- Extensive unit testing using Jest, 
 - Navigation:
     - Tab Navigation with custom icons and colors.
     - Stack Navigation for other pages with custom headers.
