@@ -1,6 +1,8 @@
 import { Text } from "react-native";
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useState } from "react";
+import { TextInput, Button } from 'react-native-paper';
+
 
 
 export default AddTab = ({todos, onAddTodo}) => {
@@ -11,6 +13,7 @@ export default AddTab = ({todos, onAddTodo}) => {
         if(text.trim()){
           const newId = todos.length>0 ? todos[0].id+1 : 1;
           onAddTodo({id: newId, title: text, completed: false});
+          setText("");
         }
     }
 
@@ -19,15 +22,16 @@ export default AddTab = ({todos, onAddTodo}) => {
     <View style={styles.inputContainer}>
                     <TextInput
                       style={styles.input}
+                      mode ='flat'
                       placeholder='Write the todo here'
-                      placeholderTextColor="white"
+                      placeholderTextColor="#191970"
                       value={text}
                       onChangeText={setText}
                       testID="input"
                     />
-                    <TouchableOpacity onPress={handleAddTab} style={styles.button} testID="button">
-                      <Text styles={styles.buttonText}>Add</Text>
-                    </TouchableOpacity>
+                    <Button onPress={handleAddTab} labelStyle={styles.buttonText} style={styles.button} testID="button">
+                      Add
+                    </Button>
     </View>
   );
 };
@@ -36,9 +40,6 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         borderColor: '#C0C0C0',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10,
         marginRight: 10,
         fontSize: 18,
         minWidth: 0,
@@ -54,13 +55,16 @@ const styles = StyleSheet.create({
         pointerEvents: 'auto'
       },
       button: {
+        mode: 'contained',
         backgroundColor: '#FFFFF0',
-        borderRadius: 5,
-        padding: 15,
-    
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#191970'
       },
       buttonText: {
         fontSize: 18,
-        color: 'black'
+        color: '#191970',
+        textAlign: 'center',
+        textAlignVertical: 'center'
       },
 });
