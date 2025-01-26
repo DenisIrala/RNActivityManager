@@ -7,7 +7,7 @@ export default Display = ({todos, onToggle, onRemove}) => {
 
       const renderItem = ({item}) => (
         <View style={styles.item} >
-            <Text testID={item.id}
+            <Text testID={item.id.toString()}
                 style={[styles.itemText, item.completed && styles.completedText]}
                 onPress={() => onToggle(item.id)}
             >

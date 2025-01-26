@@ -1,4 +1,3 @@
-import { Text } from "react-native";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { TextInput, Button } from 'react-native-paper';
