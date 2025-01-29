@@ -25,6 +25,7 @@ const app = () => {
 
         <View style={styles.modelContainer} {...event}>
           {loading && <Loader/>}
+          <>
         <Canvas> 
               <OrbitControls enablePan={true} enableZoom={false}/>
               <directionalLight position={[1,0,0]} args={['white', 2]} />
@@ -33,6 +34,7 @@ const app = () => {
 
               <Suspense fallback={<Trigger setLoading={setLoading}/>}><Model/></Suspense>
         </Canvas>
+        </>
         </View>
 
         <Link href="notabs"  style={{marginHorizontal: 'auto'}} asChild>
