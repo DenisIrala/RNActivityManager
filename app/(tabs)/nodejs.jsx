@@ -1,20 +1,31 @@
 import { StyleSheet, Image, ImageBackground, Platform } from 'react-native';
-
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function TabTwoScreen() {
+export default function nodejs() {
+
+  const [mangas, setMangas]=useState();
+
+  useEffect(()=>{
+    fetchData();
+  },[])
+
+  async function fetchData(){
+    const response = await fetch('http://localhost:8080/getList');
+    const data = await response.json();
+
+    setMangas(data);
+
+  }
+
   return (
-    <ParallaxScrollView
+    <SafeAreaView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       >
         <Text style={styles.text}>Welcome to the not so secret page!</Text>
-    </ParallaxScrollView>
+        <Text style={styles.text}>{JSON.stringify(mangas, null, 2)}</Text>
+    </SafeAreaView>
   );
 }
 

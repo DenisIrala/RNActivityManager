@@ -42,9 +42,9 @@ export default function TabLayout() {
       />
       
       <Tabs.Screen
-        name="add"
+        name="nodejs"
         options={{
-          title: 'Add',
+          title: 'NodeJS',
           tabBarIcon: ({ color }) => <AntDesign size={25} name="pluscircleo" color={'white'} />,
           animation: 'fade'
         }}
