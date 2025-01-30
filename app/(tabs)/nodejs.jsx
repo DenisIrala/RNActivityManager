@@ -15,6 +15,7 @@ export default function nodejs() {
     const response = await fetch('http://localhost:8080/getList');
     const data = await response.json();
 
+    
     setMangas(data);
 
   }
