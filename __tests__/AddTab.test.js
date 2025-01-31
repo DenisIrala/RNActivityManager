@@ -2,6 +2,7 @@ import * as React from 'react';
 import {render, fireEvent} from "@testing-library/react-native"
 import AddTab from '@/components/AddTab';
 import { press } from '@testing-library/react-native/build/user-event/press';
+jest.useFakeTimers();
 
 describe('AddTab', () => {
 
