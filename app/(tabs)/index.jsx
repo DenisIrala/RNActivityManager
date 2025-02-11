@@ -25,13 +25,12 @@ const app = () => {
 
         <View style={styles.modelContainer} {...event}>
           {loading && <Loader/>}
-          <>
+        <>
         <Canvas> 
               <OrbitControls enablePan={true} enableZoom={false}/>
               <directionalLight position={[1,0,0]} args={['white', 2]} />
               <directionalLight position={[-1,0,1]} args={['white', 2]} />
               <directionalLight position={[1,1,0]} args={['white', 2]} />
-
               <Suspense fallback={<Trigger setLoading={setLoading}/>}><Model/></Suspense>
         </Canvas>
         </>
