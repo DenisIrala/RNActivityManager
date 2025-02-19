@@ -1,8 +1,12 @@
-import { StyleSheet, Image, ImageBackground, Platform } from 'react-native';
-import { useEffect, useState } from 'react';
+import { StyleSheet, Image, ImageBackground, Platform, ScrollView, Pressable} from 'react-native';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { View, Text, FlatList, TextInput, Button, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
+import Modal from '@/components/Modal';
+import { context, Provider } from '@/components/Context';
+
+const URL='https://f91b-50-172-117-195.ngrok-free.app';
 
 export default function nodejs() {
 /*
@@ -61,6 +65,9 @@ const [newName, setNewName] = useState('');
 const [newEmail, setNewEmail] = useState('');
 const [loading, setLoading] = useState(false); // Add a loading state
 const [deletingUserId, setDeletingUserId] = useState(null); // Track which user is being deleted
+const listRef=useRef(null);
+const { text } =useContext(context);
+
 
 useEffect(() => {
   fetchUsers(); // Fetch users on component mount
@@ -68,7 +75,7 @@ useEffect(() => {
 
 const fetchUsers = async () => {
   try {
-      const response = await axios.get('https://1f9a-50-172-117-195.ngrok-free.app/users',{
+      const response = await axios.get(URL+'/users',{
         headers: {
           'User-Agent': "asd", // Customize this
         },
@@ -88,7 +95,7 @@ const addUser = async () => {
 
   setLoading(true); // Set loading to true
   try {
-      const response = await axios.post('https://1f9a-50-172-117-195.ngrok-free.app/addUser', {
+      const response = await axios.post(URL+'/addUser', {
           name: newName,
           email: newEmail,
           headers: {
@@ -134,7 +141,7 @@ const deleteUser = async (id) => {
               onPress: async () => {
                   setDeletingUserId(id); // Set the ID of the user being deleted
                   try {
-                      await axios.delete(`https://1f9a-50-172-117-195.ngrok-free.app/users/${id}`);
+                      await axios.delete(URL+`/users/${id}`);
                       fetchUsers(); // Refresh the user list
                       Alert.alert('Success', 'User deleted successfully!');
                   } catch (error) {
@@ -149,8 +156,15 @@ const deleteUser = async (id) => {
   );
 };
 
+const scrollToBottom = () => {
+  if (listRef.current) {
+    listRef.current.scrollToEnd({ animated: true });
+  }
+};
+
 return (
   <View style={styles.container}>
+    <Text style={styles.title}>{text}</Text>
       <Text style={styles.title}>Users</Text>
       <TextInput
           style={styles.input}
@@ -165,15 +179,33 @@ return (
           onChangeText={setNewEmail}
           keyboardType="email-address" // Show email keyboard
       />
-      <Button title={loading ? "Adding..." : "Add User"} onPress={addUser} disabled={loading}/>{/* Disable button while loading */}
-      {users.length > 0 && ( // Only render the FlatList if users has data
+      <Pressable   style={({ pressed }) => [ // Style based on press state
+          styles.button,
+          pressed && styles.buttonPressed, // Apply extra styles when pressed
+        ]}
+        onPress={() => {
+          addUser();
+        }}
+         ><Text style={styles.buttonText}>{loading ? "Adding..." : "Add User"}</Text></Pressable>  
+      
+      {users.length > 0 && (<><Pressable 
+          style={({ pressed }) => [ // Style based on press state
+          styles.button,
+          pressed && styles.buttonPressed, // Apply extra styles when pressed
+        ]}
+         onPress={scrollToBottom}><Text style={styles.buttonText}>Scroll to Bottom</Text></Pressable>      
     <FlatList
+        ref={listRef}
         data={users}
         renderItem={renderUser}
         keyExtractor={(item) => item._id} // Make sure this is present!
     />
-)}
+</>)}
+    <Provider>
+        <Modal/>
+    </Provider>
   </View>
+  
 );
 };
 
@@ -193,6 +225,7 @@ const styles = StyleSheet.create({
   userItem: {
         flexDirection: 'row', // Make items arrange horizontally
         alignItems: 'center', // Vertically center content
+        
         justifyContent: 'space-between', // Distribute space between name/email and button
         padding: 10,
         borderBottomWidth: 1,
@@ -210,5 +243,24 @@ const styles = StyleSheet.create({
       padding: 10,
       marginBottom: 10,
       borderRadius: 5,
+  },
+  button:{
+    backgroundColor: 'teal',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    elevation: 3, // Android shadow
+    justifyContent: 'center',
+    alignItems: 'center', 
+    margin: 10
+  },
+  buttonPressed: {
+    opacity: 0.7, // Slightly reduce opacity when pressed
+    backgroundColor: 'skyblue'  // Change background on press
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '500',
   },
 });

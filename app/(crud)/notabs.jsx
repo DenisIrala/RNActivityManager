@@ -7,11 +7,28 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { View, Text } from 'react-native';
+import { context, Provider } from '@/components/Context';
+import Modal from '@/components/Modal';
+import { useContext, useRef } from 'react';
+import { Button } from "react-native-paper"
+
+
 
 export default function PageTwo() {
+  const { text } =useContext(context);
+  const ref=useRef(null);
   return (
-    <View>
+    <View style={{
+      flex: 1,
+    }}>
       <Text style={styles.text}>Welcome to the secret page!</Text>
+      <Button onPress={()=>{
+                    ref.current?.handleSnapPress()}
+        }><Text>Test</Text>
+                </Button>
+      <Provider>
+        <Modal ref={ref}/>
+      </Provider>
     </View>
   );
 }
